@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show User</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        span {
+            text-decoration: underline;
+            margin-left: 30px;
+        }
+
+        .btn {
+            float: left;
+            margin-right: 20px;
+        }
+
+        .first_btn {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1 class="display-4">User {{ user.id }}</h1>
+        <p class="lead">View user information here.</p>
+    </div>
+    <p><span>Full Name:</span> {{ user.first_name }} {{ user.last_name }}</p>
+    <p><span>Email:</span> {{ user.email }}</p>
+    <p><span>Created At:</span> {{ user.created_at }}</p>
+    <a href="{% url 'users:edit' user.id %}" class="btn btn-primary first_btn">Edit</a>
+    <form action="{% url 'users:delete' user.id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Delete">
+    </form>
+    <a href="{% url 'users:index' %}" class="btn btn-primary">Go Back</a>
+</body>
+</html>

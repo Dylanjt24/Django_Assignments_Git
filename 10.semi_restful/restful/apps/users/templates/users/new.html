@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add New User</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        form {
+            width: 500px;
+            margin-left: 30px;
+        }
+
+        .btn {
+            float: left;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="jumbotron">
+            <h1 class="display-4">Add a new user</h1>
+            <p class="lead">Create a new user here.</p>
+        </div>
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="{% url 'users:create' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-grop">
+                <label for="first_name">First Name:</label>
+                <input type="text" class="form-control" name="first_name">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" class="form-control" name="last_name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <input type="submit" class="btn btn-success" value="Create">
+        </form>
+        <a href="{% url 'users:index' %}" class="btn btn-primary">Go Back</a>
+    </div>
+</body>
+</html>

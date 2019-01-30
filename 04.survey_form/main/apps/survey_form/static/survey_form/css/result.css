@@ -1,0 +1,24 @@
+.wrapper {
+    border: 2px solid black;
+    width: 500px;
+    margin: auto;
+    padding-left: 70px;
+    margin-top: 50px;
+}
+
+h2 {
+    text-decoration: underline;
+}
+
+p {
+    padding-left: 30px; 
+}
+
+span {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+a {
+    margin: 20px 0px 20px 110px;
+}

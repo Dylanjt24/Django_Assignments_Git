@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Delete Course</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        .wrapper {
+            width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .btn {
+            margin-left: 40px;
+        }
+
+        span {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="jumbotron">
+            <h1 class="display-6">Are you sure you want to delete the following course?</h1>
+            <p class="lead">This cannot be undone.</p>
+        </div>
+        <p><span>Name:</span> {{ course.name }}</p>
+        <p><span>Description:</span> {{ course.description }}</p>
+        <a href="{% url 'courses:index' %}" class="btn btn-primary">No</a>
+        <a href="{% url 'courses:delete' course.id %}" class="btn btn-danger">Yes! I want to delete this</a>
+    </div>
+</body>
+</html>

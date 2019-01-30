@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ninja_gold/style.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<body>
+    <div class="wrapper">
+        <p>Your Gold: <span>{{ request.session.gold }}</span></p>
+        <div class="location spaced">
+            <h1>Farm</h1>
+            <p>(earns 10-20 gold)</p>
+            <a href="/process_money/farm" class="btn btn-primary">Find Gold!</a>
+        </div>
+        <div class="location spaced">
+            <h1>Cave</h1>
+            <p>(earns 5-10 gold)</p>
+            <a href="/process_money/cave" class="btn btn-primary">Find Gold!</a>
+        </div>
+        <div class="location spaced">
+            <h1>House</h1>
+            <p>(earns 2-5 gold)</p>
+            <a href="/process_money/house" class="btn btn-primary">Find Gold!</a>
+        </div>
+        <div class="location">
+            <h1>Casino</h1>
+            <p>(earns/takes 0-50 gold)</p>
+            <a href="/process_money/casino" class="btn btn-primary">Find Gold!</a>
+        </div>
+        <p class="scroll_title">Activities:</p>
+        <div class="activities pre-scrollable">
+            {% for activity in request.session.activities reversed %}
+                <p class="{{ activity.color }}">{{ activity.activity }} ({{  activity.time }})</p>
+            {% endfor %}
+        </div>
+        <a href="/clear" class="btn btn-danger">Reset</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+book_authors queries:
+1.b = Book.objects.get(id=5)
+b.name = "C#"
+b.save()
+
+2.b = Author.objects.get(id=5)
+b.first_name = "Ketul"
+b.save()
+
+3.Author.objects.get(id=1).books.add(Book.objects.get(id=1))
+Author.objects.get(id=1).books.add(Book.objects.get(id=2))
+
+4.Author.objects.get(id=2).books.add(Book.objects.get(id=1))
+Author.objects.get(id=2).books.add(Book.objects.get(id=2))
+Author.objects.get(id=2).books.add(Book.objects.get(id=3))
+
+5.Author.objects.get(id=3).books.add(Book.objects.get(id=1))
+Author.objects.get(id=3).books.add(Book.objects.get(id=2))
+Author.objects.get(id=3).books.add(Book.objects.get(id=3))
+Author.objects.get(id=3).books.add(Book.objects.get(id=4))
+
+6.Author.objects.get(id=4).books.add(Book.objects.get(id=1))
+Author.objects.get(id=4).books.add(Book.objects.get(id=2))
+Author.objects.get(id=4).books.add(Book.objects.get(id=3))
+Author.objects.get(id=4).books.add(Book.objects.get(id=4))
+Author.objects.get(id=4).books.add(Book.objects.get(id=5))
+
+7.Book.objects.get(id=3).authors.all()
+
+8.this_book = Book.objects.get(id=3)
+this_author = Author.objects.get(id=2)
+this_book.authors.remove(this_author)
+
+9.this_book = Book.objects.get(id=2)
+this_author = Author.objects.get(id=5)
+this_book.authors.add(this_author)
+
+10.Author.objects.get(id=3).books.all()
+
+11.Author.objects.get(id=2).books.all()

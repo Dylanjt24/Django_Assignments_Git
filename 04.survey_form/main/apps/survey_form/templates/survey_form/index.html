@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'survey_form/css/index.css' %}">
+</head>
+<body>
+    <form action="/process" method="POST">
+        <div class="form-group">
+            {% csrf_token %}
+            <label for="name">Your Name:</label>
+            <input type="text" class="form-control" name="name">
+            <label for="location">Dojo Location:</label>
+            <select class="form-control" name="location">
+                <option value="Seattle">Seattle</option>
+                <option value="San Jose">San Jose</option>
+                <option value="Online">Online</option>
+            </select>
+            <label for="fav_language">Favorite Language:</label>
+            <select class="form-control" name="fav_language">
+                <option value="Python">Python</option>
+                <option value="C#">C#</option>
+                <option value="JavaScript">JavaScript</option>
+            </select>
+            <label for="comment">Comment (optional):</label>
+            <textarea class="form-control" name="comment"></textarea>
+            <input type="submit" class="btn btn-success" value="Submit">
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wall</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall/wall.css' %}">
+</head>
+<body>
+    <h4 class="welcome">Welcome, {{ user.first_name }}</h4>
+    <a href="{% url 'main:logout' %}" class="btn btn-danger logout">Log Out</a>
+    <form action="{% url 'main:post_message' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="message">Post a message:</label>
+            <textarea name="message" class="form-control" cols="30" rows="3"></textarea>
+            <input type="hidden" name="message_id" value="message.id">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Post a message">
+    </form>
+    {% for message in messages %}
+        <h2>{{ message.message_creator.first_name }} {{ message.message_creator.last_name }} - {{ message.created_at }}</h2>
+        <div class="message_container">
+            <p>{{ message.message }}</p>
+            {% if message.message_creator.id == request.session.user_id %}
+                <form action="{% url 'main:delete_message' message.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger delete" value="Delete">
+                </form>
+            {% endif %}
+        </div>
+        <div class="comment_container">
+            {% for comment in comments %}
+                {% if comment.parent_message.id == message.id %}
+                    <h4 class="comment comment-head">{{ comment.comment_creator.first_name }} {{ comment.comment_creator.last_name }} - {{ comment.created_at }}</h4>
+                    <p class="comment">{{ comment.comment }}</p>
+                {% endif %}
+            {% endfor %}
+            <form action="{% url 'main:post_comment' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="comment">Post a comment</label>
+                    <textarea name="comment" class="form-control" cols="30" rows="3"></textarea>
+                    <input type="hidden" name="message_id" value="{{ message.id }}">
+                </div>
+                <input type="submit" class="btn btn-success" value="Post a comment">
+            </form>
+        </div>
+    {% endfor %}
+</body>
+</html>

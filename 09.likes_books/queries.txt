@@ -1,0 +1,35 @@
+1. User.objects.create(first_name="Dylan", last_name="Thierbach", email="Dylan@here.com")
+User.objects.create(first_name="Bob", last_name="Belcher", email="Bbelcher@burgers.com")
+User.objects.create(first_name="Link", last_name="Link", email="Link@hyrule.com")
+
+2. user = User.objects.get(id=1)
+Book.objects.create(name="How to Use Django", desc="Instructions for using Django framework", uploader=user)
+Book.objects.create(name="Overwatch 101", desc="Tips and tricks for playing Overwatch", uploader=user)
+
+3.  user = User.objects.get(id=2)
+Book.objects.create(name="The Perfect Burger", desc="Tips on how to cook the perfect burger", uploader=user)
+Book.objects.create(name="Wonderful World of Puns", desc="How to make good puns plus a list of my own personal favorite puns", uploader=user)
+
+4. user = User.objects.get(id=3)
+Book.objects.create(name="Hyahhhhh, HYAH!", desc="Heeyah hyah hiyah hyaaaah", uploader=user)
+Book.objects.create(name="Kicking Chickens", desc="Best way to punt those chickens", uploader=user)
+
+5. user = User.objects.get(id=1)
+user.liked_books.add(Book.objects.last())
+user.liked_books.add(Book.objects.first())
+
+6. user = User.objects.get(id=2)
+user.liked_books.add(Book.objects.first())
+user.liked_books.add(Book.objects.get(id=3))
+
+7. user = User.objects.get(id=3)
+for book in Book.objects.all():
+    ...:     book.liked_users.add(user)
+
+8. Book.objects.first().liked_users.all()
+
+9. Book.objects.first().uploader
+
+10. Book.objects.get(id=2).liked_users.all()
+
+11. Book.objects.get(id=2).uploader

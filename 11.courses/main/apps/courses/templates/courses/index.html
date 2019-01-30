@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Courses</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        * {
+            margin-left: 20px;
+        }
+        .wrapper {
+            width: 1500px;
+        }
+        form {
+            width: 500px;
+        }
+
+        h2 {
+            margin-top: 50px;
+        }
+
+        .btn-success {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h2>Add a new course</h2>
+        <form action="{% url 'courses:create' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="description" class="form-control" id="" cols="30" rows="5"></textarea>
+            </div>
+            <input type="submit" class="btn btn-success" value="Add">
+        </form>
+        <h2>Courses</h2>
+        <table class="table table-striped table-dark">
+            <thead>
+                <th scope="col">Course Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date Added</th>
+                <th scope="col">Actions</th>
+            </thead>
+            <tbody>
+                {% for course in all_courses %}
+                    <tr>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course.description }}</td>
+                        <td>{{ course.created_at }}</td>
+                        <td>
+                            <form action="{% url 'courses:destroy' course.id %}">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

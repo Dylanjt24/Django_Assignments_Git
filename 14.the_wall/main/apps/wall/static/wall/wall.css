@@ -1,0 +1,37 @@
+* {
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+.welcome {
+    display: inline-block;
+}
+
+a {
+    display: inline-block;
+    margin-left: 1600px;
+}
+
+form {
+    width: 1000px;
+}
+
+.message_container {
+    margin-left: 40px;
+}
+
+.comment_container {
+    margin-left: 50px;
+}
+
+.comment-head {
+    color: blue;
+}
+
+.btn-success {
+    margin-left: 860px;
+}
+
+.btn-primary {
+    margin-left: 865px;
+}

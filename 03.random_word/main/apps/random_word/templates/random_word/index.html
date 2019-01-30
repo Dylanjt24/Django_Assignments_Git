@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random Word Generator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        * {
+            width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            width: 400px;
+            border: 2px solid black;
+            padding: 10px;
+        }
+
+        a {
+            width: 100px;
+            margin-left: 450px;
+            margin-top: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <p>Random Word (attempt #{{ request.session.count }})</p>
+    <h1>{{ word }}</h1>
+    <a class="btn btn-primary" href="/random_word">Generate</a>
+</body>
+</html>

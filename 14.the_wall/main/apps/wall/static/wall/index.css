@@ -1,0 +1,11 @@
+* {
+    margin-left: 20px;
+}
+
+form {
+    width: 500px;
+}
+
+.btn {
+    float: right;
+}

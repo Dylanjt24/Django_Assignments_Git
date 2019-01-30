@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Session Words</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        .green {
+            color: green;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .normal{
+            font-size: 18px;
+        }
+
+        .bold {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .small {
+            font-size: 12px;
+        }
+
+        .new_word {
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 50px;
+        }
+
+        .word_list {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 80px;
+            margin-top: 50px;
+            padding-left: 50px;
+            border-left: 2px solid black;
+        }
+
+        a {
+            margin-left: 200px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="new_word">
+            <h1>Add a new word</h1>
+            <form action="/session_words/add_word/" method="POST">
+                <div class="form-group">
+                    {% csrf_token %}
+                    <input type="text" class="form-control" name="word">
+                </div>
+                <label for="color">Choose a color</label>
+                <input type="hidden" name="color" value="black">
+                <div class="form-check">>
+                    <input type="radio" class="form-check-input" name="color" id="red" value="red">
+                    <label for="red" class="form-check-label">Red</label>
+                </div>
+                <div class="form-check">>
+                    <input type="radio" class="form-check-input" name="color" id="green" value="green">
+                    <label for="green" class="form-check-label">Green</label>
+                </div>
+                <div class="form-check">>
+                    <input type="radio" class="form-check-input" name="color" id="blue" value="blue">
+                    <label for="blue" class="form-check-label">Blue</label>
+                </div>
+                <input type="hidden" name="big_font" value="normal">
+                <input type="checkbox" name="big_font" value="bold">
+                <label for="big_font">show in BIG font</label><br>
+                <input type="submit" class="btn btn-primary" value="Add to Session">
+            </form>
+        </div>
+        <div class="word_list">
+            <a href="/session_words/clear/" class="btn btn-danger">Clear Session</a>
+            {% for word in request.session.words %}
+                <p><span class="{{ word.color }} {{ word.font_weight }}">{{ word.word }}</span><span class="small"> - added on {{ word.time }}</span></p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
